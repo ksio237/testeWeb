@@ -12,8 +12,9 @@ import { getSessionUser } from "@/lib/auth-user";
 //   }
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
-  const skipAuth =
-    process.env.NODE_ENV === "development" && process.env.SKIP_AUTH === "true";
+  // const skipAuth =
+  //   process.env.NODE_ENV === "development" && process.env.SKIP_AUTH === "true";
+  const skipAuth = process.env.SKIP_AUTH === "true";
   const user = skipAuth ? { nome: "Dev" } : await getSessionUser();
   if (!user) {
     // proxy.ts já deve ter redirecionado, mas garantimos a segurança no servidor.
