@@ -15,8 +15,9 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   // const hasSession = request.cookies.has(SESSION_COOKIE_NAME);
   // burlar login
-  const skipAuth =
-  process.env.NODE_ENV === "development" && process.env.SKIP_AUTH === "true";
+  // const skipAuth =
+  // process.env.NODE_ENV === "development" && process.env.SKIP_AUTH === "true";
+  const skipAuth = process.env.SKIP_AUTH === "true";
   const hasSession = skipAuth || request.cookies.has(SESSION_COOKIE_NAME);
 
   if (startsWithAny(pathname, APP_PATH_PREFIXES) && !hasSession) {
