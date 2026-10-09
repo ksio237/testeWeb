@@ -21,6 +21,13 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
+  
+  // burlar login
+  if (process.env.SKIP_AUTH === "true") {
+  const response = NextResponse.json({ ok: true });
+  setSessionCookie(response, "dev-token");
+  return response;
+}
 
   try {
     const data = await backendFetch<LoginResponse>(BACKEND_ROUTES.auth.login, {
